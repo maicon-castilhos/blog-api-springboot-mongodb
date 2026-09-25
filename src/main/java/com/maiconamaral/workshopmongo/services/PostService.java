@@ -1,5 +1,6 @@
 package com.maiconamaral.workshopmongo.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,5 +28,15 @@ public class PostService {
 
 	public List<Post> findByTitle(String title) {
 		return repo.findByTitleCustom(title);
+	}
+
+	public List<Post> searchPosts(Date fromDate, Date toDate, String searchTerm) {
+		System.out.println("DEBUG: SearchTerm = " + searchTerm);
+		System.out.println("DEBUG: FromDate = " + fromDate);
+		System.out.println("DEBUG: ToDate = " + toDate);
+
+		toDate = new Date(toDate.getTime() + 24 * 60 * 60 * 1000);
+
+		return repo.searchPosts(fromDate, toDate, searchTerm);
 	}
 }
